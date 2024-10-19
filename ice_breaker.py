@@ -1,3 +1,5 @@
+from typing import Tuple, Any
+
 from dotenv import load_dotenv
 import os
 from langchain.prompts.prompt import PromptTemplate
@@ -10,14 +12,14 @@ from langchain_ollama import ChatOllama
 from langchain_community.llms import Ollama
 
 
-from output_parsers import summary_parser
+from output_parsers import summary_parser, Summary
 from third_parties.linkedin import scrape_linkedin_profile
 from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
 
 # from langchain.chains.summarize.refine_prompts import prompt_template
 
 
-def ice_breaker_with(name: str) -> str:
+def ice_breaker_with(name: str) -> tuple[Summary, str]:
     linkedin_username = linkedin_lookup_agent(name=name)
     linkedin_data = scrape_linkedin_profile(
         linkedin_profile_url=linkedin_username, mock=True
@@ -45,14 +47,16 @@ def ice_breaker_with(name: str) -> str:
     # linkedin_data = scrape_linkedin_profile(
     #    linkedin_profile_url="https://linkedin.com/in/eden-marco/", mock=True
     # )
-    res = chain.invoke(input={"information": linkedin_data})
-    print(res)
+    res:Summary = chain.invoke(input={"information": linkedin_data})
+    return res, linkedin_data.get("profile_pic_url")
 
 
 if __name__ == "__main__":
     load_dotenv()
     print("Ice breaker Enter")
-    ice_breaker_with(name="Eden Marco")
+    print("res", ice_breaker_with(name="Harrison Chase"))
+    #print("\n profile_pic_url", ice_breaker_with(name="Harrison Chase")[1])
+
 
     '''
     print(os.environ["COOL_API_KEY"])
