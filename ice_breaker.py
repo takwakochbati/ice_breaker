@@ -40,7 +40,7 @@ def ice_breaker_with(name: str) -> str:
     # llm = ChatOpenAI(temperature = 0, model_name = "gpt-3.5-turbo")
     llm = ChatOllama(model="llama3.1")
     #llm = Ollama(model="mistral:7b-instruct-v0.2-q6_K")
-    chain = summary_prompt_template | llm |summary_parser
+    chain = summary_prompt_template | llm |StrOutputParser()|summary_parser
     #chain = summary_prompt_template | llm | StrOutputParser()
     # linkedin_data = scrape_linkedin_profile(
     #    linkedin_profile_url="https://linkedin.com/in/eden-marco/", mock=True
