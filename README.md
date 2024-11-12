@@ -11,3 +11,5 @@ This is a web application crawling Linkedin & Twitter data about a person and cu
 - OpenAI
 - llama3
 - LangSmith
+
+![logo](https://github.com/takwakochbati/ice_breaker/blob/main/interface/ice-breaker.png)
