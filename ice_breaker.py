@@ -39,7 +39,7 @@ def ice_breaker_with(name : str) -> str:
 if __name__ == "__main__":
     load_dotenv()
     print("Ice breaker Enter")
-    ice_breaker_with(name="Eden Marco")
+    ice_breaker_with(name="Takwa KOCHBATI")
 
 
     '''
